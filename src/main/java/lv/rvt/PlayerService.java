@@ -1,7 +1,7 @@
 package lv.rvt;
 
-import com.google.gson.reflect.TypeToken;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -33,6 +33,17 @@ public class PlayerService {
             if (p.getNumber() == number) return p;
         }
         return null;
+    }
+    public List<Player> getAllPlayers() {
+        return players;
+    }
+    
+    public void savePlayers() {
+        try (FileWriter writer = new FileWriter(FILE_PATH)) {
+            gson.toJson(players, writer);
+        } catch (IOException e) {
+            System.out.println("Kļūda saglabājot failu.");
+        }
     }
 
     public void saveToFile() {

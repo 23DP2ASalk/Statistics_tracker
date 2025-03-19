@@ -3,72 +3,74 @@ package lv.rvt;
 import java.util.Scanner;
 
 public class ConsoleUI {
-    private PlayerService playerService;
-    private Scanner scanner;
+    private final PlayerService service;
+    private final Scanner scanner;
 
     public ConsoleUI(PlayerService service) {
-        this.playerService = service;
+        this.service = service;
         this.scanner = new Scanner(System.in);
     }
 
     public void start() {
+        printAsciiArt();
         while (true) {
-            System.out.println("\n--- Statistics Tracker ---");
-            System.out.println("1. Pievienot spēlētāju");
-            System.out.println("2. Skatīt visus spēlētājus");
-            System.out.println("3. Atjaunināt statistiku");
-            System.out.println("4. Beigt");
-            System.out.print("Izvēlies: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine();
-
+            printMenu();
+            int choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
                 case 1 -> addPlayer();
                 case 2 -> listPlayers();
-                case 3 -> updateStats();
-                case 4 -> {
-                    System.out.println("👋 Programma beidzas.");
-                    return;
-                }
-                default -> System.out.println("❌ Nepareiza izvēle!");
+                case 3 -> saveAndExit();
+                default -> System.out.println("Nepareiza izvēle.");
             }
         }
     }
 
-    private void addPlayer() {
-        System.out.print("Vārds: ");
-        String name = scanner.nextLine();
-        System.out.print("Numurs: ");
-        int number = scanner.nextInt();
-        scanner.nextLine();
+    private void printAsciiArt() {
+        System.out.println("""
+                 _____ _        _   _       _   _             
+                / ____| |      | | (_)     | | (_)            
+               | (___ | |_ __ _| |_ _  __ _| |_ _  ___  _ __  
+                \\___ \\| __/ _` | __| |/ _` | __| |/ _ \\| '_ \\ 
+                ____) | || (_| | |_| | (_| | |_| | (_) | | | |
+               |_____/ \\__\\__,_|\\__|_|\\__,_|\\__|_|\\___/|_| |_|
+                                                  
+                      Statistikas Pārvaldības Sistēma
+               """);
+    }
 
-        playerService.addPlayer(new Player(name, number));
-        System.out.println("✅ Spēlētājs pievienots!");
+    private void printMenu() {
+        System.out.println("""
+                1. Pievienot spēlētāju
+                2. Rādīt visus spēlētājus
+                3. Saglabāt un iziet
+                """);
+        System.out.print("Izvēlies darbību: ");
+    }
+
+    private void addPlayer() {
+        System.out.print("Spēlētāja vārds: ");
+        String name = scanner.nextLine();
+        System.out.print("Vārtu skaits: ");
+        int goals = Integer.parseInt(scanner.nextLine());
+        System.out.print("Rezultativitātes piespēles: ");
+        int assists = Integer.parseInt(scanner.nextLine());
+        System.out.print("Spēļu skaits: ");
+        int games = Integer.parseInt(scanner.nextLine());
+
+        Player player = new Player(name, goals, assists, games);
+        service.addPlayer(player);
+        System.out.println("Spēlētājs pievienots.");
     }
 
     private void listPlayers() {
-        for (Player p : playerService.getPlayers()) {
-            System.out.println(p);
+        for (Player player : service.getAllPlayers()) {
+            System.out.println(player);
         }
     }
 
-    private void updateStats() {
-        System.out.print("Ievadi spēlētāja numuru: ");
-        int number = scanner.nextInt();
-        Player player = playerService.findByNumber(number);
-
-        if (player != null) {
-            System.out.println("1. Pievienot vārtus");
-            System.out.println("2. Pievienot piespēli");
-            int choice = scanner.nextInt();
-
-            if (choice == 1) player.addGoal();
-            else if (choice == 2) player.addAssist();
-
-            playerService.saveToFile();
-            System.out.println("✅ Statistika atjaunināta!");
-        } else {
-            System.out.println("❌ Spēlētājs nav atrasts.");
-        }
+    private void saveAndExit() {
+        service.savePlayers();
+        System.out.println("Dati saglabāti. Atā!");
+        System.exit(0);
     }
 }

@@ -2,29 +2,23 @@ package lv.rvt;
 
 public class Player {
     private String name;
-    private int number;
     private int goals;
     private int assists;
+    private int gamesPlayed;
 
-    public Player(String name, int number) {
+    public Player(String name, int goals, int assists, int gamesPlayed) {
         this.name = name;
-        this.number = number;
-        this.goals = 0;
-        this.assists = 0;
+        this.goals = goals;
+        this.assists = assists;
+        this.gamesPlayed = gamesPlayed;
     }
 
-    public Player() {} // Nepieciešams Gson'am
-
-    public String getName() { return name; }
-    public int getNumber() { return number; }
-    public int getGoals() { return goals; }
-    public int getAssists() { return assists; }
-
-    public void addGoal() { goals++; }
-    public void addAssist() { assists++; }
-
+    public int getGamesPlayed() {
+        return gamesPlayed;
+    }
+    
     @Override
     public String toString() {
-        return number + " - " + name + " | Goals: " + goals + ", Assists: " + assists;
+        return name + " - Vārti: " + goals + ", Piespēles: " + assists + ", Spēles: " + gamesPlayed;
     }
 }
