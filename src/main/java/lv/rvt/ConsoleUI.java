@@ -13,10 +13,10 @@ public class ConsoleUI {
     public void start() {
         printAsciiArt();
         while (true) {
-            System.out.println("\n1. Pievienot spēlētāju");
+            System.out.println(Color.CYAN + "\n1. Pievienot spēlētāju");
             System.out.println("2. Parādīt visus spēlētājus");
             System.out.println("3. Iziet");
-            System.out.print("Izvēlies darbību: ");
+            System.out.print("Izvēlies darbību: " + Color.RESET);
             String input = sc.nextLine();
 
             switch (input) {
@@ -24,15 +24,16 @@ public class ConsoleUI {
                 case "2" -> showPlayers();
                 case "3" -> {
                     service.savePlayers();
-                    System.out.println("Dati saglabāti. Uz redzēšanos!");
+                    System.out.println(Color.GREEN + "Dati saglabāti. Uz redzēšanos!" + Color.RESET);
                     return;
                 }
-                default -> System.out.println("Nederīga izvēle.");
+                default -> System.out.println(Color.RED + "Nederīga izvēle." + Color.RESET);
             }
         }
     }
 
     private void addPlayer() {
+        Color.clearConsole();
         System.out.print("Spēlētāja numurs: ");
         int number = Integer.parseInt(sc.nextLine());
         System.out.print("Vārds: ");
@@ -46,10 +47,12 @@ public class ConsoleUI {
 
         Player player = new Player(number, name, goals, assists, gamesPlayed);
         service.addPlayer(player);
-        System.out.println(Color.GREEN + "Spēlētājs pievienots vai atjaunināts veiksmīgi!" + Color.RESET);
+
+        System.out.println(Color.GREEN + "\nSpēlētājs veiksmīgi pievienots vai atjaunināts!" + Color.RESET);
     }
 
     private void showPlayers() {
+        Color.clearConsole();
         for (Player p : service.getAllPlayers()) {
             System.out.println(p);
         }

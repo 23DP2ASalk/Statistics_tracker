@@ -25,6 +25,7 @@ public class PlayerService {
                 return;
             }
         }
+        Color.clearConsole();
         players.add(newPlayer);
     }
 
