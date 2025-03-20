@@ -46,7 +46,7 @@ public class ConsoleUI {
 
         Player player = new Player(number, name, goals, assists, gamesPlayed);
         service.addPlayer(player);
-        System.out.println("Spēlētājs pievienots vai atjaunināts!");
+        System.out.println(Color.GREEN + "Spēlētājs pievienots vai atjaunināts veiksmīgi!" + Color.RESET);
     }
 
     private void showPlayers() {
@@ -56,13 +56,12 @@ public class ConsoleUI {
     }
 
     private void printAsciiArt() {
-        System.out.println("""
-   _____ _        _   _     _   _          
-  / ____| |      | | (_)   | | (_)         
- | (___ | |_ __ _| |_ _ ___| |_ _  ___ ___ 
-  \\___ \\| __/ _` | __| / __| __| |/ __/ __|
-  ____) | || (_| | |_| \\__ \\ |_| | (__\\__ \
- |_____/ \\__\\__,_|\\__|_|___/\\__|_|\\___|___/
-        """);
+        System.out.println(Color.YELLOW + "   _____ _        _   _     _   _            _______             _             ");
+        System.out.println("  / ____| |      | | (_)   | | (_)          |__   __|           | |            ");
+        System.out.println(" | (___ | |_ __ _| |_ _ ___| |_ _  ___ ___     | |_ __ __ _  ___| | _____ _ __ ");
+        System.out.println("  \\___ \\| __/ _` | __| / __| __| |/ __/ __|    | | '__/ _` |/ __| |/ / _ \\ '__|");
+        System.out.println("  ____) | || (_| | |_| \\__ \\ |_| | (__\\__ \\    | | | | (_| | (__|   <  __/ |   ");
+        System.out.println(" |_____/ \\__\\__,_|\\__|_|___/\\__|_|\\___|___/    |_|_|  \\__,_|\\___|_|\\_\\___|_|   ");
+        System.out.println("                                                                               " + Color.RESET);
     }
 }

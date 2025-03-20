@@ -7,11 +7,9 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-import javax.xml.crypto.Data;
-
 public class PlayerService {
     private final ArrayList<Player> players = new ArrayList<>();
-    private final String fileName = "player.json";
+    private final String fileName = "players.json";
     private final Gson gson = new Gson();
 
     public PlayerService() {
