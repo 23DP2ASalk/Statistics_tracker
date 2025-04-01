@@ -5,50 +5,31 @@ public class Player {
     private String name;
     private int goals;
     private int assists;
-    private int gamesPlayed;
+    private int games;
 
-    public Player(int number, String name, int goals, int assists, int gamesPlayed) {
+    public Player(int number, String name) {
         this.number = number;
         this.name = name;
-        this.goals = goals;
-        this.assists = assists;
-        this.gamesPlayed = gamesPlayed;
+        this.goals = 0;
+        this.assists = 0;
+        this.games = 0;
     }
 
-    public int getNumber() {
-        return number;
-    }
+    public int getNumber() { return number; }
+    public String getName() { return name; }
+    public int getGoals() { return goals; }
+    public int getAssists() { return assists; }
+    public int getGames() { return games; }
 
-    public String getName() {
-        return name;
-    }
-
-    public int getGoals() {
-        return goals;
-    }
-
-    public int getAssists() {
-        return assists;
-    }
-
-    public int getGamesPlayed() {
-        return gamesPlayed;
-    }
-
-    public void addGoals(int goals) {
+    public void addStats(int goals, int assists, int games) {
         this.goals += goals;
-    }
-
-    public void addAssists(int assists) {
         this.assists += assists;
-    }
-
-    public void addGamesPlayed(int games) {
-        this.gamesPlayed += games;
+        this.games += games;
     }
 
     @Override
     public String toString() {
-        return number + " | " + name + " | G: " + goals + " | A: " + assists + " | Games: " + gamesPlayed;
+        return String.format("| %-4d | %-15s | %-5d | %-5d | %-5d |",
+                number, name, goals, assists, games);
     }
 }
