@@ -29,7 +29,7 @@ public class Player {
 
     @Override
     public String toString() {
-        return String.format("| %-4d | %-15s | %-5d | %-5d | %-5d |",
+        return String.format("| %-4d | %-13s | %-5d | %-7d | %-5d |",
                 number, name, goals, assists, games);
     }
 }
