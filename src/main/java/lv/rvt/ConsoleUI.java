@@ -18,76 +18,85 @@ public class ConsoleUI {
 
         while (true) {
             showMenu();
-            try {
-                char choice = (char) System.in.read();
-                System.in.read(); // Patērē jauno rindu (\n)
+            char choice = scanner.next().charAt(0);
 
-                switch (choice) {
-                    case '1' -> addPlayer();
-                    case '2' -> showPlayers();
-                    case '3' -> removePlayer();
-                    case '4' -> {
-                        System.out.println(Color.RED + "Exiting..." + Color.RESET);
-                        return;
-                    }
-                    default -> System.out.println(Color.RED + "Invalid choice!" + Color.RESET);
+            switch (choice) {
+                case '1' -> addPlayer();
+                case '2' -> showPlayers();
+                case '3' -> deletePlayer();
+                case '4' -> {
+                    System.out.println(Color.RED + "Exiting..." + Color.RESET);
+                    return;
                 }
-            } catch (Exception e) {
-                System.out.println(Color.RED + "Error reading input!" + Color.RESET);
+                default -> System.out.println(Color.RED + "Invalid choice!" + Color.RESET);
             }
         }
     }
 
     private void printAsciiArt() {
         System.out.println(Color.YELLOW +
-            "   _____ _        _   _     _   _            _______             _             \n" +
-            "  / ____| |      | | (_)   | | (_)          |__   __|           | |            \n" +
-            " | (___ | |_ __ _| |_ _ ___| |_ _  ___ ___     | |_ __ __ _  ___| | _____ _ __ \n" +
-            "  \\___ \\| __/ _` | __| / __| __| |/ __/ __|    | | '__/ _` |/ __| |/ / _ \\ '__|\n" +
-            "  ____) | || (_| | |_| \\__ \\ |_| | (__\\__ \\    | | | | (_| | (__|   <  __/ |   \n" +
-            " |_____/ \\__\\__,_|\\__|_|___/\\__|_|\\___|___/    |_|_|  \\__,_|\\___|_|\\_\\___|_|   \n" +
-            "                                                                               "
-        + Color.RESET);
+                "   _____ _        _   _     _   _            _______             _             \n" +
+                "  / ____| |      | | (_)   | | (_)          |__   __|           | |            \n" +
+                " | (___ | |_ __ _| |_ _ ___| |_ _  ___ ___     | |_ __ __ _  ___| | _____ _ __ \n" +
+                "  \\___ \\| __/ _` | __| / __| __| |/ __/ __|    | | '__/ _` |/ __| |/ / _ \\ '__|\n" +
+                "  ____) | || (_| | |_| \\__ \\ |_| | (__\\__ \\    | | | | (_| | (__|   <  __/ |   \n" +
+                " |_____/ \\__\\__,_|\\__|_|___/\\__|_|\\___|___/    |_|_|  \\__,_|\\___|_|\\_\\___|_|   \n" +
+                "                                                                               "
+                + Color.RESET);
     }
 
     private void showMenu() {
         System.out.println(Color.CYAN + "=== STATISTICS TRACKER ===" + Color.RESET);
         System.out.println(Color.GREEN + "[1] Add Player Stats" + Color.RESET);
         System.out.println(Color.GREEN + "[2] Show Players" + Color.RESET);
-        System.out.println(Color.GREEN + "[3] Remove Player" + Color.RESET);
+        System.out.println(Color.GREEN + "[3] Delete Player" + Color.RESET);
         System.out.println(Color.GREEN + "[4] Exit" + Color.RESET);
         System.out.print("Select option: ");
     }
 
     private void addPlayer() {
-        System.out.print("Enter player number: ");
+        System.out.print("Enter player number (0 to go back): ");
         int number = scanner.nextInt();
+        if (number == 0) return;
         scanner.nextLine();
 
-        System.out.print("Enter player name: ");
-        String name = scanner.nextLine();
+        if (playerService.exists(number)) {
+            System.out.println(Color.YELLOW + "Player with this number already exists." + Color.RESET);
+            System.out.print("Enter goals to add: ");
+            int goals = scanner.nextInt();
+            System.out.print("Enter assists to add: ");
+            int assists = scanner.nextInt();
+            System.out.print("Enter games to add: ");
+            int games = scanner.nextInt();
+            playerService.addOrUpdatePlayer(number, "", goals, assists, games);
+        } else {
+            System.out.print("Enter player name: ");
+            String name = scanner.nextLine();
+            System.out.print("Enter goals: ");
+            int goals = scanner.nextInt();
+            System.out.print("Enter assists: ");
+            int assists = scanner.nextInt();
+            System.out.print("Enter games: ");
+            int games = scanner.nextInt();
+            playerService.addOrUpdatePlayer(number, name, goals, assists, games);
+        }
 
-        System.out.print("Enter goals: ");
-        int goals = scanner.nextInt();
-
-        System.out.print("Enter assists: ");
-        int assists = scanner.nextInt();
-
-        System.out.print("Enter games: ");
-        int games = scanner.nextInt();
-
-        playerService.addOrUpdatePlayer(number, name, goals, assists, games);
         System.out.println(Color.GREEN + "Player stats updated!" + Color.RESET);
         scanner.nextLine();
     }
 
-    private void removePlayer() {
-        System.out.print("Enter player number to remove: ");
+    private void deletePlayer() {
+        System.out.print("Enter player number to delete (0 to go back): ");
         int number = scanner.nextInt();
         scanner.nextLine();
 
-        playerService.removePlayer(number);
-        System.out.println(Color.RED + "Player removed!" + Color.RESET);
+        if (number == 0) return;
+
+        if (playerService.deletePlayer(number)) {
+            System.out.println(Color.GREEN + "Player deleted successfully!" + Color.RESET);
+        } else {
+            System.out.println(Color.RED + "Player not found!" + Color.RESET);
+        }
     }
 
     private void showPlayers() {
@@ -111,4 +120,3 @@ public class ConsoleUI {
         scanner.nextLine();
     }
 }
-    
