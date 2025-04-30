@@ -70,7 +70,7 @@ public class ConsoleUI {
             int games = scanner.nextInt();
             playerService.addOrUpdatePlayer(number, "", goals, assists, games);
         } else {
-            System.out.print("Enter player name: ");
+            System.out.print("Enter player full name: ");
             String name = scanner.nextLine();
             System.out.print("Enter goals: ");
             int goals = scanner.nextInt();
