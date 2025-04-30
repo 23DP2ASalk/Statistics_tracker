@@ -19,28 +19,25 @@ Lietotājs izvēlas vēlamo darbību, ievadot attiecīgo numuru. Katrs izvēlnes
 ## 3. Funkciju apraksts
 
 ### 🔹 Spēlētāju pievienošana
-- Lietotājs izvēlas `1. Pievienot spēlētāju`
+- Lietotājs izvēlas `1. Add Player Stats`
 - Programma prasa ievadīt:
-  - Vārdu
   - Spēlētāja numuru (unikāls)
-  - Pozīciju (uzbrucējs, aizsargs, vārtsargs)
-
-### 🔹 Spēles reģistrēšana
-- Lietotājs izvēlas `2. Reģistrēt spēli`
-- Ievada:
-  - Datumu
-  - Pretinieka komandu
-  - Rezultātu (piem. 5:2)
-
-### 🔹 Statistikas ievade
-- Lietotājs izvēlas `3. Ievadīt statistiku`
-- Izvēlas spēlētāju un spēli
-- Ievada statistikas datus (vārti, piespēles, sodi)
+  - Vārdu
+  - Punktu skaitu(golus un piespēles)
+  - Spēļu skaitu
 
 ### 🔹 Statistikas apskate
-- Izvēloties `4. Skatīt spēlētāju statistiku`, lietotājs var:
+- Izvēloties `2. Show Players`, lietotājs var:
   - Apskatīt kopējo statistiku
-  - Meklēt spēlētājus pēc vārda vai numura
+
+### 🔹 Statistikas dzēšana
+- Lietotājs izvēlas `3. Delete Player`, lietotājs var:
+- Dzēst spēlētaju no tabulas ievadot viņa numuru
+
+### 🔹 Statistikas apskate
+- Izvēloties `4. Exit`, lietotājs var:
+  - Saglabā datus
+  - Beidz prorammu
 
 ### 🔹 Datu saglabāšana / ielāde
 - `5. Saglabāt datus` – saglabā `JSON` failā
