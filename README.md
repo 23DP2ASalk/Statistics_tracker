@@ -79,7 +79,8 @@ Lietotājs izvēlas vēlamo darbību, ievadot attiecīgo numuru. Katrs izvēlnes
   ├── mvnw
   ├── mvnw.cmd
   ├── pom.xml
-  └── README.md </pre>
+  ├── README.md
+  └── Statistics_tracker.jar </pre>
 
 ---
 
