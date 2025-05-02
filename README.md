@@ -16,7 +16,7 @@ Programma darbojas konsoles režīmā ar teksta izvēlnēm. Pēc programmas pala
 
 Lietotājs izvēlas vēlamo darbību, ievadot attiecīgo numuru. Katrs izvēlnes punkts aizved uz nākamo soli ar detalizētiem norādījumiem.
 
-## 3. Funkciju apraksts
+## Funkciju apraksts
 
 ### 🔹 Spēlētāju pievienošana
 - Lietotājs izvēlas `1. Add Player Stats`
@@ -42,6 +42,44 @@ Lietotājs izvēlas vēlamo darbību, ievadot attiecīgo numuru. Katrs izvēlnes
 ### 🔹 Datu saglabāšana / ielāde
 - `5. Saglabāt datus` – saglabā `JSON` failā
 - `6. Ielādēt datus` – ielādē datus no iepriekš saglabāta faila
+
+---
+
+##  Projekta struktūra
+
+<pre lang="markdown">  Statistics_tracker/
+  ├── .devcontainer/
+  │   └── devcontainer.json
+  │
+  ├── .github/
+  │   └── dependabot.yml
+  ├── .mvn/
+  │   └── wrapper
+  │       └── maven-wrapper.properties
+  ├── data/
+  │   └── players.json
+  ├── src/
+  │   ├── main/
+  │   │   └── java/
+  │   │       └── lv/
+  │   │           └── rvt/
+  │   │               ├── tools/
+  │   │               │   └── Helper.java
+  │   │               ├── Color.java
+  │   │               ├── ConsoleUI.java
+  │   │               ├── Main.java
+  │   │               ├── Player.java
+  │   │               └── PlayerService.java
+  │   └── test/
+  │       └── java/
+  │           └── lv/
+  │               └── rvt/
+  │                   └── AppTest.java
+  ├── .gitignore
+  ├── mvnw
+  ├── mvnw.cmd
+  ├── pom.xml
+  └── README.md </pre>
 
 ---
 
