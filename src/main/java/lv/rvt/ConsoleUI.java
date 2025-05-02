@@ -19,6 +19,7 @@ public class ConsoleUI {
         while (true) {
             showMenu();
             char choice = scanner.next().charAt(0);
+            scanner.nextLine();
 
             switch (choice) {
                 case '1' -> addPlayer();
@@ -55,41 +56,29 @@ public class ConsoleUI {
     }
 
     private void addPlayer() {
-        System.out.print("Enter player number (0 to go back): ");
-        int number = scanner.nextInt();
+        int number = getValidIntInput("Enter player number (0 to go back): ");
         if (number == 0) return;
-        scanner.nextLine();
 
         if (playerService.exists(number)) {
             System.out.println(Color.YELLOW + "Player with this number already exists." + Color.RESET);
-            System.out.print("Enter goals to add: ");
-            int goals = scanner.nextInt();
-            System.out.print("Enter assists to add: ");
-            int assists = scanner.nextInt();
-            System.out.print("Enter games to add: ");
-            int games = scanner.nextInt();
+            int goals = getValidIntInput("Enter goals to add: ");
+            int assists = getValidIntInput("Enter assists to add: ");
+            int games = getValidIntInput("Enter games to add: ");
             playerService.addOrUpdatePlayer(number, "", goals, assists, games);
         } else {
             System.out.print("Enter player full name: ");
             String name = scanner.nextLine();
-            System.out.print("Enter goals: ");
-            int goals = scanner.nextInt();
-            System.out.print("Enter assists: ");
-            int assists = scanner.nextInt();
-            System.out.print("Enter games: ");
-            int games = scanner.nextInt();
+            int goals = getValidIntInput("Enter goals: ");
+            int assists = getValidIntInput("Enter assists: ");
+            int games = getValidIntInput("Enter games: ");
             playerService.addOrUpdatePlayer(number, name, goals, assists, games);
         }
 
         System.out.println(Color.GREEN + "Player stats updated!" + Color.RESET);
-        scanner.nextLine();
     }
 
     private void deletePlayer() {
-        System.out.print("Enter player number to delete (0 to go back): ");
-        int number = scanner.nextInt();
-        scanner.nextLine();
-
+        int number = getValidIntInput("Enter player number to delete (0 to go back): ");
         if (number == 0) return;
 
         if (playerService.deletePlayer(number)) {
@@ -129,5 +118,17 @@ public class ConsoleUI {
         System.out.println(Color.BLUE + divider + Color.RESET);
         System.out.print("Press Enter to continue...");
         scanner.nextLine();
+    }
+
+    private int getValidIntInput(String prompt) {
+        while (true) {
+            System.out.print(prompt);
+            String input = scanner.nextLine().trim();
+            try {
+                return Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println(Color.RED + "Invalid number. Please enter a valid integer." + Color.RESET);
+            }
+        }
     }
 }
