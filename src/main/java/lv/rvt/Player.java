@@ -27,9 +27,12 @@ public class Player {
         this.games += games;
     }
 
-    @Override
-    public String toString() {
-        return String.format("| %-4d | %-13s | %-5d | %-7d | %-5d |",
+    public int getTotalPoints() {
+        return goals + assists;
+    }
+
+    public String toString(int nameWidth) {
+        return String.format("| %-4d | %-" + nameWidth + "s | %-5d | %-7d | %-5d |",
                 number, name, goals, assists, games);
     }
 }

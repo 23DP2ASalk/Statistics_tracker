@@ -106,16 +106,27 @@ public class ConsoleUI {
             return;
         }
 
-        System.out.println(Color.BLUE + "+------+---------------+-------+---------+-------+" + Color.RESET);
-        System.out.println(Color.BLUE + "| Num  | Name          | Goals | Assists | Games |" + Color.RESET);
-        System.out.println(Color.BLUE + "+------+---------------+-------+---------+-------+" + Color.RESET);
-
+        int maxNameLength = "Name".length();
         for (Player p : players) {
-            System.out.printf("| %-4d | %-13s | %-5d | %-7d | %-5d |\n",
-                    p.getNumber(), p.getName(), p.getGoals(), p.getAssists(), p.getGames());
+            if (p.getName().length() > maxNameLength) {
+                maxNameLength = p.getName().length();
+            }
         }
 
-        System.out.println(Color.BLUE + "+------+---------------+-------+---------+-------+" + Color.RESET);
+        String divider = "+" + "-".repeat(6) + "+" + "-".repeat(maxNameLength + 2) +
+                "+-------+---------+-------+";
+        String header = String.format("| %-4s | %-" + maxNameLength + "s | %-5s | %-7s | %-5s |",
+                "Num", "Name", "Goals", "Assists", "Games");
+
+        System.out.println(Color.BLUE + divider + Color.RESET);
+        System.out.println(Color.BLUE + header + Color.RESET);
+        System.out.println(Color.BLUE + divider + Color.RESET);
+
+        for (Player p : players) {
+            System.out.println(p.toString(maxNameLength));
+        }
+
+        System.out.println(Color.BLUE + divider + Color.RESET);
         System.out.print("Press Enter to continue...");
         scanner.nextLine();
     }
