@@ -17,7 +17,7 @@ public class Color {
                 new ProcessBuilder("clear").inheritIO().start().waitFor();
             }
         } catch (Exception e) {
-            System.out.println("Neizdevās attīrīt termināli.");
+            System.out.println("Failed to clear terminal.");
         }
     }
 }
