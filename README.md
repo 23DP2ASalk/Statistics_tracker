@@ -2,13 +2,14 @@
 
 ## Apraksts
 
-Šī ir Java konsoles programma, kas paredzēta sporta komandas spēlētāju statistikas uzskatei un pārvaldībai. Programmas mērķis ir atvieglot trenera vai komandas vadītāja darbu, nodrošinot iespēju vienkārši pievienot spēlētājus, reģistrēt spēles un analizēt uzkrāto statistiku.
+Šī ir Java konsoles programma, kas paredzēta sporta komandas spēlētāju statistikas uzskatei un pārvaldībai. Programmas mērķis ir atvieglot trenera vai komandas vadītāja darbu, nodrošinot iespēju vienkārši pievienot spēlētājus, reģistrēt viņu statistiku un veikt dažādas analīzes.
 
 Galvenās funkcijas:
-- Pievienot spēlētājus ar informāciju par vārdu, numuru un pozīciju.
-- Reģistrēt spēles pret dažādiem pretiniekiem ar rezultātu.
-- Ievadīt un saglabāt statistiku katram spēlētājam (vārti, piespēles, sodi).
-- Attēlot statistiku un meklēt spēlētājus pēc dažādiem kritērijiem.
+- Pievienot spēlētājus ar informāciju par vārdu, numuru un statistiku.
+- Reģistrēt un uzskaitīt gūtos vārtus, piespēles un spēlētās spēles.
+- Kārtot datus pēc vairākiem kritērijiem.
+- Meklēt un filtrēt spēlētājus pēc dažādiem parametriem.
+- Veikt statistisko analīzi (vidējie rādītāji, skaitīšana diapazonā).
 
 ## Lietotāja interfeisa apraksts
 
@@ -18,30 +19,47 @@ Lietotājs izvēlas vēlamo darbību, ievadot attiecīgo numuru. Katrs izvēlnes
 
 ## Funkciju apraksts
 
-### 🔹 Spēlētāju pievienošana
+### 🔹 Spēlētāju pievienošana un rediģēšana
 - Lietotājs izvēlas `1. Add Player Stats`
 - Programma prasa ievadīt:
   - Spēlētāja numuru (unikāls)
-  - Vārdu
-  - Punktu skaitu(golus un piespēles)
+  - Vārdu (ja spēlētājs vēl nav sistēmā)
+  - Punktu skaitu (golus un piespēles)
   - Spēļu skaitu
 
 ### 🔹 Statistikas apskate
 - Izvēloties `2. Show Players`, lietotājs var:
-  - Apskatīt kopējo statistiku
+  - Apskatīt kopējo statistiku par visiem spēlētājiem
 
 ### 🔹 Statistikas dzēšana
 - Lietotājs izvēlas `3. Delete Player`, lietotājs var:
-- Dzēst spēlētaju no tabulas ievadot viņa numuru
+  - Dzēst spēlētāju no tabulas ievadot viņa numuru
 
-### 🔹 Statistikas apskate
-- Izvēloties `4. Exit`, lietotājs var:
-  - Saglabā datus
-  - Beidz prorammu
+### 🔹 Datu kārtošana
+- Izvēloties `4. Sort Players`, lietotājs var:
+  - Kārtot pēc viena kritērija (numurs, vārds, goli, piespēles, spēles, kopējie punkti)
+  - Kārtot pēc diviem kritērijiem (primārais un sekundārais)
+  - Izvēlēties kārtošanas virzienu (augoši vai dilstoši)
+
+### 🔹 Datu filtrēšana
+- Izvēloties `5. Filter Players`, lietotājs var:
+  - Meklēt pēc vārda (daļēja atbilstība)
+  - Meklēt pēc numura
+  - Filtrēt pēc skaitliskajiem kritērijiem (goli, piespēles, spēles, kopējie punkti)
+  - Izmantot dažādus salīdzināšanas operatorus (=, >, <, >=, <=)
+
+### 🔹 Statistikas analīze
+- Izvēloties `6. Show Statistics`, lietotājs var:
+  - Skaitīt spēlētājus ar vērtībām noteiktā diapazonā
+  - Apskatīt vidējos rādītājus (goli, piespēles, spēles, kopējie punkti)
+
+### 🔹 Programmas beigšana
+- Izvēloties `7. Exit`, lietotājs var:
+  - Saglabāt datus un beigt programmu
 
 ### 🔹 Datu saglabāšana / ielāde
-- `5. Saglabāt datus` – saglabā `JSON` failā
-- `6. Ielādēt datus` – ielādē datus no iepriekš saglabāta faila
+- Dati automātiski tiek saglabāti `JSON` failā pēc izmaiņām
+- Dati automātiski tiek ielādēti, palaižot programmu
 
 ---
 
@@ -83,5 +101,19 @@ Lietotājs izvēlas vēlamo darbību, ievadot attiecīgo numuru. Katrs izvēlnes
 
 ---
 
-Programma veidota atbilstoši objektorientētai pieejai, katram galvenajam objektam (Spēlētājs, Spēle, Statistika) ir sava klase. Tiek izmantotas datu filtrēšanas un meklēšanas metodes, kā arī tiek nodrošināta datu uzglabāšana ārējos failos.
+## Tehniskās īpatnības
 
+Programma veidota atbilstoši objektorientētai pieejai, katram galvenajam objektam ir sava klase. 
+
+### Datu apstrāde
+- **Daudzpusīga kārtošana**: Iespēja kārtot pēc jebkura kritērija vai vairākiem kritērijiem vienlaicīgi
+- **Elastīga filtrēšana**: Meklēšana un filtrēšana pēc dažādiem kritērijiem, izmantojot dažādus operatorus
+- **Statistiskā analīze**: Datu apkopošana, vidējo rādītāju aprēķināšana, datu skaitīšana diapazonā
+
+### Kodu organizācija
+- **Enums**: Izmantoti uzskaitījuma tipi (SortCriteria, FilterCriteria, NumericFilterCriteria, ComparisonOperator)
+- **Java Streams API**: Izmantots efektīvai datu apstrādei un filtrēšanai
+- **Komparatoru ķēdes**: Iespēja kombinēt vairākus kārtošanas kritērijus
+- **Datu persistēšana**: Automātiska datu saglabāšana un ielāde JSON formātā
+
+Programma demonstrē modernas Java valodas iespējas un struktūras, kas atvieglo datu pārvaldīšanu un analīzi.
