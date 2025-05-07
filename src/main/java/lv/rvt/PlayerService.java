@@ -12,7 +12,7 @@ import com.google.gson.reflect.TypeToken;
 
 public class PlayerService {
     private final String TEMP_FILE_PATH;
-    private final String DATA_FILE_PATH = "data/players.json";
+    private final String DATA_FILE_PATH = "Statistics_tracker/data/players.json";
     private final Gson gson = new Gson();
     private List<Player> players;
 
