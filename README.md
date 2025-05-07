@@ -92,7 +92,12 @@ Lietotājs izvēlas vēlamo darbību, ievadot attiecīgo numuru. Katrs izvēlnes
   │       └── java/
   │           └── lv/
   │               └── rvt/
-  │                   └── AppTest.java
+  │                   ├── AppTest.java
+  │                   ├── ColorTest.java
+  │                   ├── EnumsTest.java
+  │                   ├── PlayerServicePersistenceTest.java
+  │                   ├── PlayerTest.java
+  │                   └── TestSuite.java
   ├── .gitignore
   ├── mvnw
   ├── mvnw.cmd
